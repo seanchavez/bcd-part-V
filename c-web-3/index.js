@@ -26,4 +26,10 @@ const web3 = new Web3(url);
 // })
 
 //console.log(web3);
-web3.eth.getAccounts().then(accounts => console.log(accounts));
+web3.eth.getAccounts().then(accounts => {
+  accounts.map(acct => {
+    web3.eth.getBalance(acct).then(bal => {
+      console.log(web3.utils.fromWei(bal, 'ether'));
+    });
+  });
+});
