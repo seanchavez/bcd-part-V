@@ -10,3 +10,7 @@ web3.eth.getBalance(address, (err, bal) => {
   const eth = web3.utils.fromWei(bal, 'ether');
   console.log(eth);
 });
+
+web3.eth.getTransactionCount(address, (err, count) => {
+  console.log(count);
+});
