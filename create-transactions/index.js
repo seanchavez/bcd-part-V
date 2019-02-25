@@ -1,8 +1,15 @@
 const Web3 = require('web3');
-const EthereumTx = require('ethereumjs-tx');
-const web3 = new Web3(
-  'https://mainnet.infura.io/v3/cf9e60827ece40c79e3c8206dcdf8f52',
-);
+const web3 = new Web3('http://127.0.0.1:8545');
+
+web3.eth
+  .getTransactionCount('0x1978b8fe79ebf4d52fca363e395992f34f4c1a45')
+  .then(console.log);
+
+// const Web3 = require('web3');
+// const EthereumTx = require('ethereumjs-tx');
+// const web3 = new Web3(
+//   'https://mainnet.infura.io/v3/cf9e60827ece40c79e3c8206dcdf8f52',
+// );
 // const fromAddress = '0x7608e8e059e21e10eacfdeede75d84b926a77cda';
 // const toAddress = '0x54e5acebae205f59b5c7af3f8d7d1cc3f2c3a56a';
 
@@ -30,11 +37,8 @@ const web3 = new Web3(
 // web3.eth.getBalance(fromAddress).then(console.log);
 // web3.eth.getBalance(toAddress).then(console.log);
 
-web3.eth.getGasPrice().then(console.log);
-web3.eth.getUncle(500, 0).then(console.log);
-web3.eth
-  .getBlockTransactionCount('0x407d73d8a49eeb85d32cf465507dd71d507100c1')
-  .then(console.log);
-
-
-  
+// web3.eth.getGasPrice().then(console.log);
+// web3.eth.getUncle(500, 0).then(console.log);
+// web3.eth
+//   .getBlockTransactionCount('0x407d73d8a49eeb85d32cf465507dd71d507100c1')
+//   .then(console.log);
