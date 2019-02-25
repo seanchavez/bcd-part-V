@@ -103,42 +103,75 @@
 
       // Set a default account
       web3.eth.defaultAccount = web3.eth.accounts[0];
-
-      // Get the contract address
-      var RemixContract = web3.eth.contract([
-        {
-          constant: false,
-          inputs: [
-            {
-              name: 'x',
-              type: 'string',
-            },
-          ],
-          name: 'setMessage',
-          outputs: [],
-          payable: false,
-          stateMutability: 'nonpayable',
-          type: 'function',
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: 'getMessage',
-          outputs: [
-            {
-              name: '',
-              type: 'string',
-            },
-          ],
-          payable: false,
-          stateMutability: 'view',
-          type: 'function',
-        },
-      ]);
+      console.log(web3.eth.accounts);
 
       // Get the contract abi
+      var RemixContract = web3.eth.contract(
+        [
+          {
+            constant: false,
+            inputs: [
+              {
+                name: 'x',
+                type: 'string',
+              },
+            ],
+            name: 'setMessage',
+            outputs: [],
+            payable: false,
+            stateMutability: 'nonpayable',
+            type: 'function',
+          },
+          {
+            constant: true,
+            inputs: [],
+            name: 'getMessage',
+            outputs: [
+              {
+                name: '',
+                type: 'string',
+              },
+            ],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+          },
+        ],
+
+        //   {
+        //     constant: false,
+        //     inputs: [
+        //       {
+        //         name: 'x',
+        //         type: 'string',
+        //       },
+        //     ],
+        //     name: 'setMessage',
+        //     outputs: [],
+        //     payable: false,
+        //     stateMutability: 'nonpayable',
+        //     type: 'function',
+        //   },
+        //   {
+        //     constant: true,
+        //     inputs: [],
+        //     name: 'getMessage',
+        //     outputs: [
+        //       {
+        //         name: '',
+        //         type: 'string',
+        //       },
+        //     ],
+        //     payable: false,
+        //     stateMutability: 'view',
+        //     type: 'function',
+        //   },
+      );
+
+      // Get the contract address
       var myMessage = RemixContract.at(
-        '0x0258bc273fb2e5b6114b33b929df7c0a17680d80',
+        '0xe528cb2aca44f8e0270d17f2b06258393d51bcf3',
+        //'0x0258bc273fb2e5b6114b33b929df7c0a17680d80',
       );
 
       console.log(myMessage);
