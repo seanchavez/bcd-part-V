@@ -12,6 +12,7 @@
   "author": "Sean Chavez",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "openzeppelin-solidity": "^2.1.3",
     "truffle-hdwallet-provider": "^1.0.4"
   }
