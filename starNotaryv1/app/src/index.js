@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import starNotaryArtifact from '../../build/contracts/MetaCoin.json';
+import starNotaryArtifact from '../../build/contracts/StarNotary.json';
 
 const App = {
   web3: null,
@@ -12,9 +12,9 @@ const App = {
     try {
       // get contract instance
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = metaCoinArtifact.networks[networkId];
+      const deployedNetwork = starNotaryArtifact.networks[networkId];
       this.meta = new web3.eth.Contract(
-        metaCoinArtifact.abi,
+        starNotaryArtifact.abi,
         deployedNetwork.address,
       );
 
@@ -22,36 +22,54 @@ const App = {
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
 
-      this.refreshBalance();
+      //this.refreshBalance();
     } catch (error) {
       console.error('Could not connect to contract or chain.');
     }
   },
 
-  refreshBalance: async function() {
-    const { getBalance } = this.meta.methods;
-    const balance = await getBalance(this.account).call();
+  // refreshBalance: async function() {
+  //   const { getBalance } = this.meta.methods;
+  //   const balance = await getBalance(this.account).call();
 
-    const balanceElement = document.getElementsByClassName('balance')[0];
-    balanceElement.innerHTML = balance;
-  },
+  //   const balanceElement = document.getElementsByClassName('balance')[0];
+  //   balanceElement.innerHTML = balance;
+  // },
 
-  sendCoin: async function() {
-    const amount = parseInt(document.getElementById('amount').value);
-    const receiver = document.getElementById('receiver').value;
+  // sendCoin: async function() {
+  //   const amount = parseInt(document.getElementById('amount').value);
+  //   const receiver = document.getElementById('receiver').value;
 
-    this.setStatus('Initiating transaction... (please wait)');
+  //   this.setStatus('Initiating transaction... (please wait)');
 
-    const { sendCoin } = this.meta.methods;
-    await sendCoin(receiver, amount).send({ from: this.account });
+  //   const { sendCoin } = this.meta.methods;
+  //   await sendCoin(receiver, amount).send({ from: this.account });
 
-    this.setStatus('Transaction complete!');
-    this.refreshBalance();
-  },
+  //   this.setStatus('Transaction complete!');
+  //   this.refreshBalance();
+  // },
 
   setStatus: function(message) {
     const status = document.getElementById('status');
     status.innerHTML = message;
+  },
+  starNameFunc: async function() {
+    const { starName } = this.meta.methods;
+    const response = await starName().call();
+    const owner = document.getElementById('name');
+    owner.innerHTML = response;
+  },
+  starOwnerFunc: async function() {
+    const { starOwner } = this.meta.methods;
+    const response = await starOwner().call();
+    const owner = document.getElementById('owner');
+    owner.innerHTML = response;
+  },
+  claimStarFunc: async function() {
+    const { claimStar, starOwner } = this.meta.methods;
+    await claimStar().send({ from: this.account });
+    const response = await starOwner().call();
+    App.setStatus(`New Star Owner is ${response}.`);
   },
 };
 
