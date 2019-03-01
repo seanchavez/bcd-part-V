@@ -33,7 +33,13 @@ const App = {
     status.innerHTML = message;
   },
 
-  createStar: async function() {},
+  createStar: async function() {
+    const {createStar} = this.meta.methods;
+    const name = document.getElementById("starName").value
+    const id = document.getElementById("starId").value
+    await createStar(name, id).send({from: this.account})
+    App.setStatus(`New owner is ${this.account}.`)
+  },
 };
 
 window.App = App;
